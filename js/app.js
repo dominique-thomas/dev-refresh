@@ -246,7 +246,7 @@ function renderList(listId) {
     </div>
     ${isStarredList ? "" : `<div class="chips">${chips}</div>`}
     ${emptyMessage ? `<p class="hint">${emptyMessage}</p>` : `<ul>${rows}</ul>`}
-    ${!isStarredList && seenCount ? `<button type="button" class="text-button" data-action="reset-seen" data-id="${listId}">Mark this category as unseen</button>` : ""}`;
+    ${!isStarredList && seenCount ? `<button type="button" class="text-button" data-action="reset-seen" data-id="${listId}">Reset this category</button>` : ""}`;
 }
 
 //----------------------------------
