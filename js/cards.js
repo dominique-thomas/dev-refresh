@@ -10,7 +10,7 @@
   id         unique, progress is saved against it, so do not rename
   category   matches an id in CATEGORIES
   title      shown in lists and as a Quick match answer
-  summary    what it is and the older way, or the "why" on UI / UX cards
+  summary    what it does and why it is useful
   demo       optional HTML rendered live on the card
   compare    optional { bad, good } HTML pair, used by UI / UX cards
   action     optional { label, run } button, run may return a status message
@@ -44,8 +44,8 @@ export const CARDS = [
   {
     id: "html-details",
     category: "html",
-    title: "Accordion without JavaScript",
-    summary: "You used to need a plugin or click handler. Now the browser handles expanding and collapsing.",
+    title: "Expandable sections with details",
+    summary: "The native <details> element creates expandable content sections with built-in interaction and keyboard support.",
     demo: `<details>
       <summary>What is the return policy?</summary>
       <p>Thirty days, with the receipt.</p>
@@ -60,15 +60,15 @@ export const CARDS = [
 </details>`,
     useCases: "FAQs, transcripts, and optional hints.",
     scenarios: [
-      "Expand a section in place when its heading is tapped, with no script.",
+      "Expand a section in place when its heading is tapped, using native HTML.",
       "Keep a transcript folded under a heading until the reader opens it."
     ]
   },
   {
     id: "html-dialog",
     category: "html",
-    title: "Native modal",
-    summary: "Modals used to mean a plugin plus an overlay div. The dialog element brings its own backdrop, traps focus, and closes on Esc.",
+    title: "Native modal dialogs",
+    summary: "The <dialog> element provides modal behavior, including a backdrop, focus management, and Escape-key dismissal when opened with showModal().",
     demo: `<dialog id="demo-dialog">
       <p>This is a native modal. Esc closes it too.</p>
       <form method="dialog"><button>Close</button></form>
@@ -96,7 +96,7 @@ document.getElementById("confirm").showModal();`,
     id: "html-pickers",
     category: "html",
     title: "Date and color pickers",
-    summary: "Datepicker and colorpicker plugins were everywhere. Input types now open the device's own picker.",
+    summary: "Native input types provide date, time, color, and range controls that adapt to the browser and device.",
     demo: `<label>Date <input type="date"></label>
     <label>Color <input type="color" value="#a593ff"></label>`,
     code: `<input type="date">
@@ -106,14 +106,14 @@ document.getElementById("confirm").showModal();`,
     useCases: "Scheduling fields, theme settings, and simple sliders.",
     scenarios: [
       "Let someone choose a day using the phone's own calendar control.",
-      "Let someone choose a theme color from a swatch control, with no library."
+      "Let someone choose a theme color from a swatch control, through a browser API."
     ]
   },
   {
     id: "html-validation",
     category: "html",
-    title: "Form validation without a script",
-    summary: "Checking fields used to mean a validation plugin. A few attributes make the browser block the submit and explain what is wrong.",
+    title: "Built-in form validation",
+    summary: "HTML validation attributes help check required fields, formats, and input lengths before a form submits.",
     demo: `<form>
       <label>Email <input type="email" required placeholder="you@example.com"></label>
       <button>Submit</button>
@@ -131,7 +131,7 @@ document.getElementById("confirm").showModal();`,
     id: "html-lazy",
     category: "html",
     title: "Lazy-loading images",
-    summary: "Deferring images below the fold used to take a scroll listener or a plugin. One attribute does it now.",
+    summary: "The loading attribute lets the browser defer offscreen images and iframes until they are likely to be needed.",
     code: `<img src="chart.png" alt="Sales by month"
      loading="lazy" width="800" height="450">
 
@@ -144,8 +144,8 @@ document.getElementById("confirm").showModal();`,
   {
     id: "html-datalist",
     category: "html",
-    title: "Autocomplete suggestions",
-    summary: "Autocomplete was a jQuery UI widget. A datalist gives a text field a list of suggestions and still accepts anything typed.",
+    title: "Input suggestions with datalist",
+    summary: "Pair an input with a <datalist> to offer suggested values while still allowing free-form entries.",
     demo: `<label>Pick a topic
       <input list="demo-topics" placeholder="Start typing">
     </label>
@@ -172,7 +172,7 @@ document.getElementById("confirm").showModal();`,
     id: "css-flex-grid",
     category: "css",
     title: "Centering and equal columns",
-    summary: "Floats, clearfix, and negative margins did this job for years. Flexbox and grid handle it in a couple of lines.",
+    summary: "Flexbox and Grid provide straightforward ways to align content, distribute space, and create consistent layouts.",
     demo: `<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px">
       <div class="demo-tile">One</div>
       <div class="demo-tile">Two</div>
@@ -195,14 +195,14 @@ document.getElementById("confirm").showModal();`,
     useCases: "Page layouts, toolbars, card grids, and empty states.",
     scenarios: [
       "Put a box in the exact middle of its container, both directions.",
-      "Lay out three columns of equal width with a gap, without floats."
+      "Lay out three columns of equal width with a gap, using CSS Grid."
     ]
   },
   {
     id: "css-custom-properties",
     category: "css",
     title: "Custom properties for theming",
-    summary: "Variables used to need Sass and a build step. CSS has its own, and they can change while the page is running.",
+    summary: "CSS custom properties keep shared design values in one place and can update dynamically as themes or states change.",
     demo: `<div style="--tone: #a593ff; display: flex; gap: 8px">
       <div class="demo-tile" style="flex: 1; border: 2px solid var(--tone)">Border</div>
       <div class="demo-tile" style="flex: 1; color: var(--tone)">Text</div>
@@ -226,7 +226,7 @@ document.getElementById("confirm").showModal();`,
     id: "css-clamp",
     category: "css",
     title: "Fluid sizes with clamp()",
-    summary: "Scaling type meant a stack of media queries or a script. clamp() sets a minimum, a preferred size, and a maximum in one line.",
+    summary: "Use clamp() to set a minimum, preferred, and maximum size so text and spacing scale smoothly across screen widths.",
     demo: `<p style="font-size: clamp(1rem, 7vw, 2.25rem); font-weight: 700; line-height: 1.2">This heading scales</p>
     <p>Rotate your phone or resize the window to see it change.</p>`,
     code: `h1 {
@@ -241,7 +241,7 @@ document.getElementById("confirm").showModal();`,
     id: "css-scroll-snap",
     category: "css",
     title: "Scroll snap carousel",
-    summary: "Carousels were one of the most common plugins. A scrolling row with snap points gives you the swipe behavior with no script.",
+    summary: "CSS scroll snapping helps a horizontally scrolling collection settle neatly on each item, including during touch gestures.",
     demo: `<div style="display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory">
       <div class="demo-tile" style="flex: 0 0 80%; scroll-snap-align: center; padding: 36px 12px">Slide 1</div>
       <div class="demo-tile" style="flex: 0 0 80%; scroll-snap-align: center; padding: 36px 12px">Slide 2</div>
@@ -267,7 +267,7 @@ document.getElementById("confirm").showModal();`,
     id: "css-sticky",
     category: "css",
     title: "Sticky headers",
-    summary: "Pinning a header used to take a scroll handler that swapped classes. position: sticky does it with one rule.",
+    summary: "Use position: sticky to keep an element visible at a defined offset as its scroll container moves.",
     demo: `<div style="height: 150px; overflow-y: auto; border: 1px solid var(--border-strong); border-radius: 8px">
       <div style="position: sticky; top: 0; padding: 8px 12px; background: var(--surface-raised); font-weight: 600">Section A</div>
       <p style="padding: 8px 12px">Scroll inside this box.</p>
@@ -288,8 +288,8 @@ document.getElementById("confirm").showModal();`,
   {
     id: "css-aspect-ratio",
     category: "css",
-    title: "aspect-ratio for media boxes",
-    summary: "Responsive video boxes relied on the padding-bottom percentage hack. aspect-ratio states the shape directly.",
+    title: "Aspect ratios for media",
+    summary: "The aspect-ratio property keeps media containers and placeholders at a consistent shape as their width changes.",
     demo: `<div style="aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; border-radius: 8px; background: var(--surface-raised)">16 / 9 at any width</div>`,
     code: `.video {
   width: 100%;
@@ -297,7 +297,7 @@ document.getElementById("confirm").showModal();`,
 }`,
     useCases: "Video embeds, thumbnails, and placeholder boxes.",
     scenarios: [
-      "Keep a video box at 16 by 9 at any width, without the padding hack."
+      "Keep a video box at 16 by 9 at any width, as the layout changes."
     ]
   },
 
@@ -306,45 +306,39 @@ document.getElementById("confirm").showModal();`,
   {
     id: "js-queryselector",
     category: "javascript",
-    title: "querySelector in place of $()",
-    summary: "Selecting by CSS selector was jQuery's headline feature. The browser has had the same thing built in for years.",
-    code: `// jQuery
-$(".card .title").addClass("active");
-
-// Now
+    title: "Selecting elements with querySelector",
+    summary: "Use querySelector() and querySelectorAll() to find elements with CSS selectors, then work with them through standard DOM APIs.",
+    code: `// Select an element and update its classes
 document.querySelector(".card .title")
   .classList.add("active");
 
 // All matches
 document.querySelectorAll(".card")
   .forEach((card) => card.hidden = false);`,
-    useCases: "Any DOM work that used to start with $().",
+    useCases: "Selecting and updating page elements.",
     scenarios: [
-      "Find an element with the same selector syntax you used inside $()."
+      "Find an element with a CSS selector with querySelector()."
     ]
   },
   {
     id: "js-fetch",
     category: "javascript",
-    title: "fetch in place of $.ajax",
-    summary: "Requests used to mean $.ajax or the awkward XMLHttpRequest. fetch is built in and returns a promise.",
-    code: `// jQuery
-$.ajax({ url: "/api/courses", success: showCourses });
-
-// Now
+    title: "Making requests with fetch",
+    summary: "The fetch() API makes HTTP requests and returns a promise that you can use to process responses and data.",
+    code: `// Request course data
 fetch("/api/courses")
   .then((response) => response.json())
   .then(showCourses);`,
     useCases: "Loading content, saving form data, and calling APIs.",
     scenarios: [
-      "Request something from a URL in the background without loading a library."
+      "Request something from a URL in the background using the browser API."
     ]
   },
   {
     id: "js-async-await",
     category: "javascript",
-    title: "async / await in place of callbacks",
-    summary: "Steps that depend on each other used to nest callback inside callback. await lets you write them top to bottom.",
+    title: "Managing asynchronous steps",
+    summary: "async and await let you express dependent asynchronous operations in a readable sequence.",
     code: `async function loadCourse(id) {
   const response = await fetch("/api/courses/" + id);
   const course = await response.json();
@@ -353,14 +347,14 @@ fetch("/api/courses")
 }`,
     useCases: "Any sequence of requests or timed steps.",
     scenarios: [
-      "Write steps that wait on each other in reading order, without nesting callbacks."
+      "Write steps that wait on each other in reading order, in a readable sequence."
     ]
   },
   {
     id: "js-array-methods",
     category: "javascript",
-    title: "Array methods",
-    summary: "$.each and $.grep covered looping and filtering. Arrays now have map, filter, find, and more of their own.",
+    title: "Working with array methods",
+    summary: "Use map(), filter(), and find() to transform collections, select matching items, and locate specific values.",
     code: `const lessons = [
   { title: "Intro", done: true },
   { title: "Quiz", done: false }
@@ -371,14 +365,14 @@ const open = lessons.filter((lesson) => !lesson.done);
 const quiz = lessons.find((lesson) => lesson.title === "Quiz");`,
     useCases: "Turning data into markup, filtering lists, and looking things up.",
     scenarios: [
-      "Build a new list from an existing one without writing a for loop."
+      "Build a new list from an existing one using an array method."
     ]
   },
   {
     id: "js-template-destructuring",
     category: "javascript",
     title: "Template literals and destructuring",
-    summary: "Building strings meant quotes and plus signs, and reading object fields meant repeating the object name. Both got shorthand.",
+    summary: "Template literals interpolate values into strings, while destructuring makes it easier to extract fields from objects.",
     code: `const lesson = { title: "Intro", minutes: 12 };
 
 // Pull fields out in one line
@@ -388,25 +382,22 @@ const { title, minutes } = lesson;
 const label = \`\${title} (\${minutes} min)\`;`,
     useCases: "Building markup strings and unpacking config objects.",
     scenarios: [
-      "Drop variables into a string without plus signs, across several lines if needed."
+      "Drop variables into a string inside a template literal, including multiline text."
     ]
   },
   {
     id: "js-optional-chaining",
     category: "javascript",
     title: "Optional chaining",
-    summary: "Reading a nested value safely took a chain of && checks. The ?. operator stops and gives undefined if anything along the way is missing.",
-    code: `// Before
-const city = user && user.address && user.address.city;
-
-// Now
+    summary: "Optional chaining (?.) safely accesses properties that may be missing; nullish coalescing (??) provides a fallback for null or undefined.",
+    code: `// Safely access an optional nested property
 const city = user?.address?.city;
 
 // With a fallback
 const name = user?.name ?? "Guest";`,
     useCases: "API responses and config objects with optional parts.",
     scenarios: [
-      "Read a nested value that might be missing without the page throwing an error."
+      "Read a nested value that might be missing using optional chaining."
     ]
   },
 
@@ -416,7 +407,7 @@ const name = user?.name ?? "Guest";`,
     id: "api-speech",
     category: "browser-apis",
     title: "Read text aloud",
-    summary: "The browser has built-in voices. No audio files and no library.",
+    summary: "Speech synthesis can read text aloud using voices available in the browser and operating system.",
     action: {
       label: "Hear it",
       run: () => {
@@ -436,7 +427,7 @@ speechSynthesis.speak(message);`,
     id: "api-clipboard",
     category: "browser-apis",
     title: "Copy to clipboard",
-    summary: "Copy buttons used to need a Flash-based plugin, then a hidden text field trick. Now it is one call.",
+    summary: "The Clipboard API lets a page copy text in response to an action, such as selecting a Copy button.",
     action: {
       label: "Copy a sample",
       run: async () => {
@@ -454,7 +445,7 @@ speechSynthesis.speak(message);`,
     id: "api-share",
     category: "browser-apis",
     title: "Native share sheet",
-    summary: "Share buttons used to be a row of social widgets. On phones the page can open the system share menu instead.",
+    summary: "The Web Share API can open the device’s sharing interface for links and other supported content.",
     action: {
       label: "Open share sheet",
       run: async () => {
@@ -476,7 +467,7 @@ speechSynthesis.speak(message);`,
     id: "api-localstorage",
     category: "browser-apis",
     title: "Local storage",
-    summary: "Remembering something on the device used to mean cookies and a plugin to read them. Local storage keeps simple values per site.",
+    summary: "localStorage saves small pieces of site-specific data, such as preferences or progress, between visits in the same browser.",
     action: {
       label: "Count a tap",
       run: () => {
@@ -498,8 +489,8 @@ localStorage.setItem("progress", JSON.stringify({ seen: 8 }));`,
   {
     id: "api-intersection-observer",
     category: "browser-apis",
-    title: "Run code when something scrolls into view",
-    summary: "This used to be a scroll handler measuring positions on every tick, usually through a waypoints plugin. An observer tells you when it happens.",
+    title: "Detecting elements in view",
+    summary: "IntersectionObserver notifies your code when an element enters or leaves a viewport or another observed area.",
     code: `const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
@@ -518,7 +509,7 @@ observer.observe(document.querySelector(".chart"));`,
     id: "api-web-audio",
     category: "browser-apis",
     title: "Web Audio basics",
-    summary: "Sound used to mean audio files or Flash. The browser can generate and shape sound in code.",
+    summary: "The Web Audio API can generate, connect, and process audio for interactive sound and visualization.",
     action: {
       label: "Play a tone",
       run: () => {
@@ -544,7 +535,7 @@ oscillator.start();
 oscillator.stop(context.currentTime + 0.4);`,
     useCases: "Feedback sounds, simple games, and audio visualizers.",
     scenarios: [
-      "Generate a tone or sound effect in code, with no audio file."
+      "Generate a tone or sound effect in code, using the Web Audio API."
     ]
   },
 
@@ -554,7 +545,7 @@ oscillator.stop(context.currentTime + 0.4);`,
     id: "ux-tap-targets",
     category: "ui-ux",
     title: "Tap target size",
-    summary: "Fingers are less precise than a mouse pointer. Controls around 44px tall with space between them are much harder to miss or mis-tap.",
+    summary: "Comfortable touch targets and adequate spacing make controls easier to use accurately, especially on smaller screens.",
     compare: {
       bad: `<div style="display: flex; gap: 2px">
         <button type="button" style="min-height: 0; padding: 1px 5px; font-size: 11px">Edit</button>
@@ -576,7 +567,7 @@ oscillator.stop(context.currentTime + 0.4);`,
     id: "ux-contrast",
     category: "ui-ux",
     title: "Contrast and readable text",
-    summary: "Low-contrast text looks refined in a mockup and is hard to read on a real screen in daylight. Body text should stand clearly off its background.",
+    summary: "Readable contrast helps people distinguish text and interface elements across devices, lighting conditions, and visual abilities.",
     compare: {
       bad: `<p style="color: #55525f">Export finished. Your file is ready to download.</p>`,
       good: `<p style="color: var(--text)">Export finished. Your file is ready to download.</p>`
@@ -589,8 +580,8 @@ oscillator.stop(context.currentTime + 0.4);`,
   {
     id: "ux-button-labels",
     category: "ui-ux",
-    title: "Button labels that say what happens",
-    summary: "Yes, No, and OK make people reread the question. A label that names the action can be understood on its own.",
+    title: "Action-focused button labels",
+    summary: "Button labels should describe the result of an action so people can make decisions without rereading surrounding text.",
     compare: {
       bad: `<p>Delete this project?</p>
       <div style="display: flex; gap: 10px">
@@ -612,7 +603,7 @@ oscillator.stop(context.currentTime + 0.4);`,
     id: "ux-states",
     category: "ui-ux",
     title: "Loading and empty states",
-    summary: "A blank area reads as broken. Saying what belongs there and offering the next step turns it into a starting point.",
+    summary: "Clear loading and empty states explain what is happening, what content belongs in a space, and what someone can do next.",
     compare: {
       bad: `<div style="height: 72px"></div>`,
       good: `<p>No projects yet.</p>
@@ -626,8 +617,8 @@ oscillator.stop(context.currentTime + 0.4);`,
   {
     id: "ux-errors",
     category: "ui-ux",
-    title: "Error messages that help",
-    summary: "A code or a vague failure leaves people guessing. Say what went wrong in plain words and what to do about it.",
+    title: "Helpful error messages",
+    summary: "Useful error messages explain the problem in plain language and offer a practical next step.",
     compare: {
       bad: `<p>Error: invalid input (422)</p>`,
       good: `<p>That image is over 5 MB. Choose one under 5 MB.</p>`
@@ -641,7 +632,7 @@ oscillator.stop(context.currentTime + 0.4);`,
     id: "ux-thumb-reach",
     category: "ui-ux",
     title: "Thumb reach on phones",
-    summary: "The top corners of a phone are the hardest area to reach one-handed. Main actions are easier to hit near the bottom.",
+    summary: "Place frequently used actions where they are comfortable to reach during one-handed use, while accounting for different devices and grips.",
     compare: {
       bad: `<div style="display: flex; flex-direction: column; width: 110px; height: 180px; padding: 8px; border: 2px solid var(--border-strong); border-radius: 14px">
         <button type="button" style="align-self: flex-end; min-height: 0; padding: 4px 8px; font-size: 12px">Next</button>
@@ -661,8 +652,8 @@ oscillator.stop(context.currentTime + 0.4);`,
   {
     id: "a11y-semantics",
     category: "accessibility",
-    title: "Semantic elements over generic divs",
-    summary: "A div with a click handler looks like a button but ignores the keyboard and says nothing to a screen reader. The real element does both for free.",
+    title: "Semantic HTML elements",
+    summary: "Native interactive elements provide expected keyboard behavior and meaningful semantics that generic containers do not provide automatically.",
     code: `<!-- Needs extra work to be usable -->
 <div class="button" onclick="save()">Save</div>
 
@@ -674,14 +665,14 @@ oscillator.stop(context.currentTime + 0.4);`,
 <footer>...</footer>`,
     useCases: "Buttons, links, navigation, and page regions.",
     scenarios: [
-      "Make a clickable control work with Tab and Enter without adding any attributes."
+      "Make a clickable control work with Tab and Enter using a native HTML element."
     ]
   },
   {
     id: "a11y-focus-visible",
     category: "accessibility",
     title: "Visible focus styles",
-    summary: "Removing outlines because they showed on mouse clicks left keyboard users lost. :focus-visible shows the ring only when it is needed.",
+    summary: "Use :focus-visible to provide a clear focus indicator when keyboard navigation or another input method needs it.",
     demo: `<button type="button">Tab to me</button>
     <p>With a keyboard, Tab shows a ring. A tap or click does not.</p>`,
     code: `:focus-visible {
@@ -690,14 +681,14 @@ oscillator.stop(context.currentTime + 0.4);`,
 }`,
     useCases: "Every interactive element on a page.",
     scenarios: [
-      "Show a clear ring for keyboard users without it appearing on every mouse click."
+      "Show a clear ring for keyboard users when the input method calls for it."
     ]
   },
   {
     id: "a11y-reduced-motion",
     category: "accessibility",
     title: "Respecting reduced motion",
-    summary: "Some people get dizzy or distracted by movement and set their device to limit it. A media query lets the page honor that setting.",
+    summary: "The prefers-reduced-motion media query lets an interface adapt animations and transitions to a person’s motion preferences.",
     code: `@media (prefers-reduced-motion: reduce) {
   * {
     animation: none;
@@ -713,7 +704,7 @@ oscillator.stop(context.currentTime + 0.4);`,
     id: "a11y-labels",
     category: "accessibility",
     title: "Labels on form fields",
-    summary: "Placeholder text disappears as soon as someone types and is often skipped by screen readers. A label stays visible and is tied to its field.",
+    summary: "Visible, associated labels help people understand fields and give assistive technology an accessible name for each control.",
     demo: `<label for="demo-name">Course name</label>
     <input id="demo-name" type="text">
     <p>Tap the words "Course name" and the field takes focus.</p>`,
@@ -727,8 +718,8 @@ oscillator.stop(context.currentTime + 0.4);`,
   {
     id: "a11y-alt-text",
     category: "accessibility",
-    title: "Alt text that is useful",
-    summary: "Alt text stands in for the image, so it should say what the image tells the reader. Decorative images get an empty alt so they are skipped.",
+    title: "Useful alternative text",
+    summary: "Alternative text communicates the purpose or information of an image; purely decorative images can use an empty alt attribute.",
     code: `<!-- Says what the image shows -->
 <img src="chart.png" alt="Completion rose from 60% to 85% after the redesign">
 
@@ -742,8 +733,8 @@ oscillator.stop(context.currentTime + 0.4);`,
   {
     id: "a11y-aria",
     category: "accessibility",
-    title: "When ARIA is needed and when it is not",
-    summary: "ARIA fills gaps that HTML cannot. If a native element already does the job, use it, and add ARIA only for what is left, like naming an icon button.",
+    title: "Using ARIA appropriately",
+    summary: "Start with semantic HTML, then use ARIA when additional accessible names, roles, or states are needed.",
     code: `<!-- Not needed, a button is already a button -->
 <button role="button">Save</button>
 
@@ -762,8 +753,8 @@ oscillator.stop(context.currentTime + 0.4);`,
   {
     id: "data-file-protocol",
     category: "data",
-    title: "What works when you double-click the file",
-    summary: "A page opened from a folder runs under file:// and the browser treats it more strictly. fetch and module imports are blocked, and local storage behaves differently from browser to browser.",
+    title: "Running pages from local files",
+    summary: "Pages opened with file:// can face browser security restrictions that affect requests, modules, and storage. A local server provides a more consistent development environment.",
     code: `// Blocked on file://
 fetch("config.json");
 import { CARDS } from "./cards.js";
@@ -782,8 +773,8 @@ python3 -m http.server`,
   {
     id: "data-json",
     category: "data",
-    title: "Reading JSON from a file or API",
-    summary: "JSON is the usual format for data moving between a page and a server. It arrives as text and needs to be parsed into objects.",
+    title: "Reading JSON from files and APIs",
+    summary: "JSON is a common format for exchanging structured data. Parse JSON strings into JavaScript values, or serialize values when saving or sending them.",
     code: `// From a request
 const response = await fetch("courses.json");
 const courses = await response.json();
@@ -800,7 +791,7 @@ const text = JSON.stringify(settings);`,
     id: "data-request-states",
     category: "data",
     title: "Handling slow and failed requests",
-    summary: "A request can be slow, fail, or come back with an error page. fetch only rejects on network failure, so a 404 has to be checked by hand.",
+    summary: "Plan for loading, network failures, and HTTP error responses. fetch() does not reject automatically for statuses such as 404.",
     code: `status.textContent = "Loading...";
 
 try {
@@ -812,14 +803,14 @@ try {
 }`,
     useCases: "Anything that loads data after the page opens.",
     scenarios: [
-      "Catch a 404 from a request, which fetch does not treat as a failure by default."
+      "Catch a 404 from a request, by checking the HTTP response status."
     ]
   },
   {
     id: "data-config-js",
     category: "data",
-    title: "Config files as plain JavaScript",
-    summary: "A .json config has to be fetched, which fails without a server. The same data in a .js file loads with a script tag anywhere, and it can hold comments.",
+    title: "Configuration with JavaScript files",
+    summary: "A plain JavaScript configuration file can expose settings through a script tag, including in projects opened directly from a folder.",
     code: `// config.js
 const CONFIG = {
   title: "Safety Basics",
@@ -837,8 +828,8 @@ const CONFIG = {
   {
     id: "data-url-params",
     category: "data",
-    title: "Query strings and URLSearchParams",
-    summary: "Reading ?lesson=3 from the address used to mean splitting strings by hand or a small plugin. URLSearchParams parses it for you.",
+    title: "Reading URL parameters",
+    summary: "URLSearchParams provides a convenient way to read and check values in a page’s query string.",
     code: `// Address: page.html?lesson=3&mode=review
 const params = new URLSearchParams(location.search);
 
@@ -852,8 +843,8 @@ params.has("mode");   // true`,
   {
     id: "data-api-keys",
     category: "data",
-    title: "API keys and where they should not go",
-    summary: "Anything in front-end code can be read by anyone who opens the page source. A secret key belongs on a server, which makes the call on the page's behalf.",
+    title: "Protecting API keys",
+    summary: "Front-end code is visible to visitors. Keep secret credentials on a server and route protected API requests through it.",
     code: `// Visible to every visitor
 fetch("https://api.example.com/data?key=SECRET");
 

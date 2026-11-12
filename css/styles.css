@@ -284,8 +284,13 @@ h1:focus {
   color: var(--accent);
 }
 
-.section-label {
+.section > .section-label {
   color: var(--muted);
+  padding-bottom: 8px;
+}
+
+.section > p{
+  padding-bottom: 5px;
 }
 
 .card-title {
@@ -305,6 +310,15 @@ h1:focus {
 .card-summary,
 .card-section p {
   color: var(--text-soft);
+  padding-bottom: 20px;
+}
+
+.example-section p {
+  color: var(--text-soft);
+}
+
+.card-section{
+  padding-top: 20px;
 }
 
 .code {
@@ -326,7 +340,7 @@ h1:focus {
   gap: 8px;
 }
 
-.demo-status {
+#demo-status {
   min-height: 21px;
   font-size: 14px;
   color: var(--muted);

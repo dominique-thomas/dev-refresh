@@ -303,6 +303,8 @@ function renderCard(id) {
   const atStart = deck.index === 0;
   const atEnd = !isRandom && deck.index === deck.ids.length - 1;
   const starred = isStarred(id);
+  const example = renderDemo(card);
+
 
   app.innerHTML = `
     <div class="top-bar">
@@ -315,18 +317,40 @@ function renderCard(id) {
         <h1 class="card-title" tabindex="-1">${escapeHtml(card.title)}</h1>
       </header>
       <p class="card-summary">${escapeHtml(card.summary)}</p>
-      ${renderDemo(card)}
-      ${card.action ? `
-        <div class="demo-action">
-          <button type="button" class="button button--outline" data-action="run-demo">${escapeHtml(card.action.label)}</button>
-          <p class="demo-status" role="status"></p>
-        </div>` : ""}
-      ${card.code ? `<pre class="code"><code>${escapeHtml(card.code)}</code></pre>` : ""}
+
+      <section class="example-section section">
+        <h2 class="section-label">Example</h2>
+
+        ${card.demo || card.compare || card.action
+          ? `
+            ${renderDemo(card)}
+
+            ${card.action ? `
+              <div class="demo-action">
+                <button type="button"
+                  class="button button--outline"
+                  data-action="run-demo">
+                  ${escapeHtml(card.action.label)}
+                </button>
+                <p id="demo-status" role="status"></p>
+              </div>
+            ` : ""}
+          `
+          : "<p>N/A</p>"
+        }
+      </section>
+
+      <section class="code-section section">
+        <h2 class="section-label">Code</h2> 
+        ${card.code ? `<pre class="code"><code>${escapeHtml(card.code)}</code></pre>` : ""}
+      </section>
+
       ${card.useCases ? `
-        <section class="card-section">
-          <h2 class="section-label">Good for</h2>
+        <section class="card-section section">
+          <h2 class="section-label">Use Cases</h2>
           <p>${escapeHtml(card.useCases)}</p>
         </section>` : ""}
+
     </article>
     <div class="card-bar">
       <div class="card-bar-inner">
@@ -335,12 +359,14 @@ function renderCard(id) {
         <button type="button" class="button button--primary" data-action="next" ${atEnd ? "disabled" : ""}>Next</button>
       </div>
     </div>`;
+
+    
 }
 
 // Run the demo button on the current card and show its result
 async function runDemo() {
   const card = getCard(deck.ids[deck.index]);
-  const status = app.querySelector(".demo-status");
+  const status = document.getElementById("demo-status");
   try {
     const message = await card.action.run();
     status.textContent = message || "";
